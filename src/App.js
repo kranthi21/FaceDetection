@@ -77,7 +77,7 @@ class App extends Component{
 
   onButtonSubmit = () => {
     console.log("button clicked");
-    fetch('http://localhost:3000/imageUrl',{
+    fetch('https://face-21-api.onrender.com/imageUrl',{
       method:'post',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({
@@ -86,7 +86,7 @@ class App extends Component{
     })
     .then(response => response.json())
     .then(resp => {
-      fetch('http://localhost:3000/image',{
+      fetch('https://face-21-api.onrender.com/image',{
         method:'put',
         headers: {'content-type': 'application/json'},
         body: JSON.stringify({

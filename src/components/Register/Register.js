@@ -25,7 +25,7 @@ class Register extends Component{
     onSubmitRegister = () => {
         const {email, name, password} = this.state;
         console.log('password',password);
-        fetch('http://localhost:3000/register',{
+        fetch('https://face-21-api.onrender.com/register',{
             method:'post',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify({
