@@ -24,24 +24,29 @@ class Register extends Component{
 
     onSubmitRegister = () => {
         const {email, name, password} = this.state;
-        console.log('password',password);
-        fetch('https://face-21-api.onrender.com/register',{
-            method:'post',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify({
-                email: email,
-                name: name,
-                password: password
+        if(!email || !name || !password){
+            alert("Please fill all the fields");
+        }
+        else{
+            console.log('password',password);
+            fetch('https://face-21-api.onrender.com/register',{
+                method:'post',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify({
+                    email: email,
+                    name: name,
+                    password: password
+                })
             })
-        })
-        .then(response => response.json())
-        .then(user =>{
-            if(user){
-                this.props.loadUser(user);
-                this.props.onRouteChange('Home');
-            }
-        })
-        .catch(console.log)
+            .then(response => response.json())
+            .then(user =>{
+                if(user){
+                    this.props.loadUser(user);
+                    this.props.onRouteChange('Home');
+                }
+            })
+            .catch(console.log)
+        }
     }
 
     render(){

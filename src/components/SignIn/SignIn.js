@@ -19,21 +19,26 @@ class SignIn extends Component{
 
     onSubmitSignIn = () => {
         const {signInEmail, signInPassword} = this.state;
-        fetch('https://face-21-api.onrender.com/signin',{ //'http://localhost:3000',
-            method:'post',
-            headers:{'content-type': 'application/json'},
-            body: JSON.stringify({
-                email: signInEmail,
-                password: signInPassword
+        if(!signInEmail || !signInPassword){
+            alert('please fill all fields');
+        }
+        else {
+            fetch('https://face-21-api.onrender.com/signin',{ //'http://localhost:3000',
+                method:'post',
+                headers:{'content-type': 'application/json'},
+                body: JSON.stringify({
+                    email: signInEmail,
+                    password: signInPassword
+                })
+            }).then(response => response.json())
+            .then(user => {
+                console.log('sign in', user)
+                if(user.id){
+                    this.props.loadUser(user);
+                    this.props.onRouteChange('Home');
+                }
             })
-        }).then(response => response.json())
-        .then(user => {
-            console.log('sign in', user)
-            if(user.id){
-                this.props.loadUser(user);
-                this.props.onRouteChange('Home');
-            }
-        })
+        }
     }
 
     render() {
